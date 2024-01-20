@@ -54,11 +54,11 @@ Users will be able to:
 
 | Method | Endpoint       | Params                                                                                                                                                           | Description                      |
 | ------ | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
-| GET    | /recipes       |                                                                                                                                                                  | returns all public recipes       |
-| POST   | /recipes       | title, image_url, is_private, user_id, ingredients_attributes => [amount, unit, name, ordinal], directions_attributes => [direction, ordinal]                    | creates a new recipe             |
-| PATCH  | /recipes/:id   | title, image_url, is_private, ingredients_attributes => [id, amount, unit, name, ordinal, _destroy], directions_attributes => [id, direction, ordinal, _destroy] | updates a recipe                 |
-| DELETE | /recipes/:id   | recipe_id                                                                                                                                                        | deletes a recipe                 |
-| GET    | /recipes/:id   | recipe_id                                                                                                                                                        | return a public recipe           |
+| GET    | /banners       |                                                                                                                                                                  | returns all unarchived banners       |
+| POST   | /banners       | label, imageURL, isArchived, link | creates a banner             |
+| PATCH  | /banners/:id   | label, imageURL, isArchived, link | updates a banner                 |
+| DELETE | /banners/:id   | bannerId                                                                                                                                                        | deletes a banner                 |
+| GET    | /banners/:id   | bannerId                                                                                                                                                       | return an unarchived banner           |
 | GET    | /avatars       |                                                                                                                                                                  | returns all avatars              |
 | POST   | /favorites     | recipe_id, user_id                                                                                                                                               | favorites a recipe               |
 | DELETE | /favorites/:id |                                                                                                                                                                  | unfavorites a recipe             |
