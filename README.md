@@ -27,14 +27,13 @@ This headless CMS allows members of your company to review the inventory items y
 - PlanetScale
 - Cloudinary
 
-
 ## Features
 
 Users will be able to:
 
 - Import inventory models from their Flex5 rental inventory
 - Create, update, and delete products and categories without manipulating their data in Flex5.
-- Archive inventory models without manipulating their data in Flex5. 
+- Archive inventory models without manipulating their data in Flex5.
 - Upload multiple images for products.
 - Mark products as featured so they are shown on the rental site's homepage.
 - Create, update, and delete product filters such as "Manufacturer" and "Size".
@@ -52,22 +51,22 @@ Users will be able to:
 
 ### Backend API Endpoints
 
-| Method | Endpoint       | Params                                                                                                                                                           | Description                      |
-| ------ | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
-| GET    | /banners       |                                                                                                                                                                  | returns all unarchived banners       |
-| POST   | /banners       | label, imageURL, isArchived, link | creates a banner             |
-| PATCH  | /banners/:id   | label, imageURL, isArchived, link | updates a banner                 |
-| DELETE | /banners/:id   | bannerId                                                                                                                                                        | deletes a banner                 |
-| GET    | /banners/:id   | bannerId                                                                                                                                                       | return an unarchived banner           |
-| GET    | /avatars       |                                                                                                                                                                  | returns all avatars              |
-| POST   | /favorites     | recipe_id, user_id                                                                                                                                               | favorites a recipe               |
-| DELETE | /favorites/:id |                                                                                                                                                                  | unfavorites a recipe             |
-| GET    | /users/:id     | user_id                                                                                                                                                          | returns a user and their recipes |
-| POST   | /users         | username, password, avatar_id                                                                                                                                    | creates a new user               |
-| PATCH  | /users/:id     | user_id, avatar_id                                                                                                                                               | updates a user's avatar          |
-| GET    | /auth          |                                                                                                                                                                  | authenticates teh current user   |
-| POST   | /login         | username, password                                                                                                                                               | creates a user session           |
-| DELETE | /logout        |                                                                                                                                                                  | deletes a user session           |
+| Method | Endpoint        | Params                            | Description                                                      |
+| ------ | --------------- | --------------------------------- | ---------------------------------------------------------------- |
+| GET    | /banners        |                                   | returns all unarchived banners                                   |
+| POST   | /banners        | label, imageURL, isArchived, link | creates a banner                                                 |
+| PATCH  | /banners/:id    | label, imageURL, isArchived, link | updates a banner                                                 |
+| DELETE | /banners/:id    | bannerId                          | deletes a banner                                                 |
+| GET    | /banners/:id    | bannerId                          | return an unarchived banner                                      |
+| GET    | /categories     | parentId                          | returns all child categories                                     |
+| POST   | /categories     | name, parentId, bannerId          | creates a category                                               |
+| PATCH  | /categories/:id | name, parentId, bannerId          | updates a category                                               |
+| DELETE | /categories/:id | categoryId                        | deletes a category                                               |
+| GET    | /categories/:id |                                   | returns a category, its parent category and its child categories |
+| PATCH  | /users/:id      | user_id, avatar_id                | updates a user's avatar                                          |
+| GET    | /auth           |                                   | authenticates teh current user                                   |
+| POST   | /login          | username, password                | creates a user session                                           |
+| DELETE | /logout         |                                   | deletes a user session                                           |
 
 ## Acknowledgements
 

@@ -1,10 +1,7 @@
 "use client";
 
-import axios from "axios";
-import { useState } from "react";
-import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react";
-import { useParams, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { CategoryColumn } from "./columns";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,41 +9,37 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { AlertModal } from "@/components/modals/alert-modal";
+import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { AlertModal } from "@/components/modals/alert-modal";
+import axios from "axios";
 
-import { BannerColumn } from "./columns";
-
-interface CellActionProps {
-  data: BannerColumn;
-}
-
-export const CellAction: React.FC<CellActionProps> = ({ data }) => {
-  const router = useRouter();
+type Props = {
+  data: CategoryColumn;
+};
+function CellAction({ data }: Props) {
   const [open, setOpen] = useState(false);
+
   const [loading, setLoading] = useState(false);
 
   const onConfirm = async () => {
     try {
       setLoading(true);
-      await axios.delete(`/api/banners/${data.id}`);
-      toast.success("Billboard deleted.");
+      await axios.delete(`/api/categories/${data.id}`);
+      toast.success("Category deleted.");
       router.refresh();
     } catch (error) {
       toast.error(
-        "Make sure you removed all categories using this banner first."
+        "Make sure you removed all products using this category first."
       );
     } finally {
       setOpen(false);
       setLoading(false);
     }
   };
-
-  const onCopy = (id: string) => {
-    navigator.clipboard.writeText(id);
-    toast.success("Banner ID copied to clipboard.");
-  };
-
+  const router = useRouter();
   return (
     <>
       <AlertModal
@@ -64,21 +57,28 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-          <DropdownMenuItem onClick={() => onCopy(data.id)}>
-            <Copy className="mr-2 h-4 w-4" /> Copy Id
+          <DropdownMenuItem
+            onClick={() => {
+              navigator.clipboard.writeText(data.id);
+              toast.success("Category Id copied to clipboard");
+            }}
+          >
+            <Copy className="mr-2 h-4 w-4" />
+            Copy ID
           </DropdownMenuItem>
           <DropdownMenuItem
-            onClick={() =>
-              router.push(`/banners/${data.id}`)
-            }
+            onClick={() => router.push(`/categories/${data.id}`)}
           >
-            <Edit className="mr-2 h-4 w-4" /> Update
+            <Edit className="mr-2 h-4 w-4" />
+            Update
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setOpen(true)}>
-            <Trash className="mr-2 h-4 w-4" /> Delete
+            <Trash className="mr-2 h-4 w-4" />
+            Delete
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </>
   );
-};
+}
+export default CellAction;
