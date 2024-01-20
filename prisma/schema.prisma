@@ -1,0 +1,219 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  directUrl    = env("DIRECT_DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model Banner {
+  id         String  @id @default(uuid())
+  label      String
+  imageURL   String
+  link       String
+  isArchived Boolean @default(false)
+
+  categories Category[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Category {
+  id                String  @id @default(uuid())
+  name              String
+  ordinal           Int     @default(0)
+  globalSortOrdinal Int     @default(0)
+  isDeleted         Boolean @default(false)
+
+  parentId String?
+  parent   Category? @relation("ChildToParent", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  bannerId String?
+  banner   Banner?   @relation(fields: [bannerId], references: [id])
+
+  children Category[] @relation("ChildToParent")
+  products Product[]  @relation("CategoryToProduct")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([bannerId])
+  @@index([parentId])
+}
+
+model Size {
+  id        String  @id @default(uuid())
+  value     String  @unique
+  isDeleted Boolean @default(false)
+
+  products Product[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Manufacturer {
+  id        String  @id @default(uuid())
+  name      String  @unique
+  country   String?
+  isDeleted Boolean @default(false)
+
+  products Product[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Product {
+  id          String  @id @default(uuid())
+  name        String
+  description String  @db.Text
+  weight      String?
+  dimensions  String?
+  barcode     String?
+  ordinal     Int     @default(0)
+  isArchived  Boolean @default(false)
+  isFeatured  Boolean @default(false)
+  isDeleted   Boolean @default(false)
+
+  categoryId     String
+  category       Category      @relation("CategoryToProduct", fields: [categoryId], references: [id])
+  sizeId         String?
+  size           Size?         @relation(fields: [sizeId], references: [id])
+  manufacturerId String?
+  manufacturer   Manufacturer? @relation(fields: [manufacturerId], references: [id])
+
+  images     Image[]
+  quoteItems QuoteItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([categoryId])
+  @@index([sizeId])
+  @@index([manufacturerId])
+}
+
+model Image {
+  id  String @id @default(uuid())
+  url String
+
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([productId])
+}
+
+model Quote {
+  id            String    @id @default(uuid())
+  quoteNum      String?
+  status        Status    @default(PENDING)
+  acceptedTerms Boolean   @default(false)
+  submittedAt   DateTime?
+
+  company   String?
+  firstName String  @default("")
+  lastName  String  @default("")
+  email     String  @default("")
+  phone     String  @default("")
+
+  startDate            DateTime       @default(now())
+  endDate              DateTime       @default(now())
+  deliveryMethod       DeliveryMethod @default(PICKUP)
+  notes                String?        @db.Text
+  deliveryContactName  String         @default("")
+  deliveryContactPhone String         @default("")
+  venueName            String         @default("")
+  venueLine1           String         @default("")
+  venueLine2           String         @default("")
+  venueCity            String         @default("")
+  venueState           String         @default("")
+  venueZipcode         String         @default("")
+  venueCountry         String         @default("")
+
+  isDeleted Boolean @default(false)
+
+  quoteItems QuoteItem[]
+  staffNotes Note[]
+
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  View         View[]
+  StatusChange StatusChange[]
+}
+
+model QuoteItem {
+  id        String  @id @default(uuid())
+  quoteId   String
+  quote     Quote   @relation(fields: [quoteId], references: [id])
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  quantity  Int     @default(1)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([quoteId, productId])
+  @@index([quoteId])
+  @@index([productId])
+}
+
+model Note {
+  id     String @id @default(uuid())
+  note   String @db.Text
+  userId String
+
+  quoteId String
+  quote   Quote  @relation(fields: [quoteId], references: [id])
+
+  createdAt DateTime @default(now())
+
+  @@index([quoteId])
+}
+
+model View {
+  id     String @id @default(uuid())
+  userId String
+
+  quoteId   String
+  quote     Quote    @relation(fields: [quoteId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@index([quoteId])
+}
+
+model StatusChange {
+  id             String @id @default(uuid())
+  previousStatus Status
+  newStatus      Status
+  userId         String
+
+  quoteId   String
+  quote     Quote    @relation(fields: [quoteId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@index([quoteId])
+}
+
+enum Status {
+  PENDING
+  NEW
+  READ
+  IMPORTED
+  NEW_NOTE
+}
+
+enum DeliveryMethod {
+  DELIVERY
+  PICKUP
+}
