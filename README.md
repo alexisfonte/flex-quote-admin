@@ -12,6 +12,7 @@ This headless CMS allows members of your company to review the inventory items y
 - [Features](#features)
 - [Schema](#schema)
 - [Backend API Endpoints](#backend-api-endpoints)
+- [Future Improvements](#future-improvements)
 - [Acknowledgements](#acknowledgements)
 
 ## Technologies Used
@@ -26,6 +27,7 @@ This headless CMS allows members of your company to review the inventory items y
 - MySQL
 - PlanetScale
 - Cloudinary
+- Nodemailer
 
 ## Features
 
@@ -42,8 +44,6 @@ Users will be able to:
 - View customer quotes and import them into Flex (disabled in demo)
 - View graphs of most popular products and categories.
 - Track who's viewed a quote.
-- Leave staff note's on a quote.
-- View a quote's status history.
 
 ### Schema
 
@@ -81,7 +81,16 @@ Users will be able to:
 | POST   | /quotes            | acceptedTerms, company,firstName, lastName, email, phone, startDate, endDate, deliveryMethod, notes, deliveryContactName, deliveryContactPhone, venueName, venueLine1, venueLine2, venueCity, venueState, venueZipcode, venueCountry, quoteItems | creates and submits a quote                                                        |
 | PATCH  | /quotes/:id        | status                                                                                                                                                                                                                                           | updates a quote's status                                                           |
 | DELETE | /quotes/:id        | quoteId                                                                                                                                                                                                                                          | deletes a quote                                                                    |
-| PATCH  | /quotes/:id/export | quoteId                                                                                                                                                                                                                                          | imports a quote into the company's flex5 database and marke the status as imported |
+| PATCH  | /quotes/:id/export | quoteId                                                                                                                                                                                                                                          | imports a quote into the company's flex5 database and marks the status as imported |
+| GET    | /inventory/update  |                                                                                                                                                                                                                                                  | updates the invventory from the company's flex database                            |
+| DELETE | /inventory/reset   |                                                                                                                                                                                                                                                  | resets the inventory (ie. Categories, Products, Sizes, Manufacturers)              |
+
+## Future Improvements
+
+In progress:
+
+- ability to add staff notes to the quotes
+- quote status change log
 
 ## Acknowledgements
 
