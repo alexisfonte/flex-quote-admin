@@ -72,7 +72,12 @@ Users will be able to:
 | POST   | /sizes     | value                     | creates a size                                           |
 | GET    | /sizes/:id |                                   | returns a size                                           |
 | PATCH  | /sizes/:id | value                    | updates a size                                           |
-| DELETE | /sizes/:id | manufaturerId                     | deletes a size                                           |
+| DELETE | /sizes/:id | sizeId                     | deletes a size                                           |
+| GET    | /products     | searchTerm, categoryId, manufacturerId[], sizeId[], isFeatured                                  | returns all products that fit the params and their filters                                        |
+| POST   | /products     | name, description, weight, dimensions, manufacturerId, categoryId, sizeId, images,isFeatured, isArchived, barcode                     | creates a product                                           |
+| GET    | /products/:id |                                   | returns a product and it's breadcrumbs                                           |
+| PATCH  | /products/:id | name, description, weight, dimensions, manufacturerId, categoryId, sizeId, images,isFeatured, isArchived, barcode                    | updates a product                                           |
+| DELETE | /products/:id | productId       | deletes a product                                           |
 
 ## Acknowledgements
 
