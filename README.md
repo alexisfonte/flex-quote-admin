@@ -68,6 +68,11 @@ Users will be able to:
 | GET    | /manufacturers/:id |                                   | returns a manufacturer                                           |
 | PATCH  | /manufacturers/:id | name, country                     | updates a manufacturer                                           |
 | DELETE | /manufacturers/:id | manufaturerId                     | deletes a manufacturer                                           |
+| GET    | /sizes     |                                   | returns all sizes                                        |
+| POST   | /sizes     | value                     | creates a size                                           |
+| GET    | /sizes/:id |                                   | returns a size                                           |
+| PATCH  | /sizes/:id | value                    | updates a size                                           |
+| DELETE | /sizes/:id | manufaturerId                     | deletes a size                                           |
 
 ## Acknowledgements
 
