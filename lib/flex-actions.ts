@@ -184,6 +184,7 @@ export async function update(
             globalSortOrdinal: parseInt(
               row["Category Global Ordinal"].replaceAll(",", "")
             ),
+            isDeleted: false
           },
           create: {
             id: categoryId,
@@ -195,7 +196,8 @@ export async function update(
             ordinal: parseInt(row["Category Ordinal"].replaceAll(",", "")),
             globalSortOrdinal: parseInt(
               row["Category Global Ordinal"].replaceAll(",", "")
-            )
+            ),
+            isDeleted: false
           },
         });
         categoryIds.push(updatedCategory.id);
@@ -226,6 +228,7 @@ export async function update(
               row["Manufacturer Country"] === "null"
                 ? null
                 : row["Manufacturer Country"],
+                isDeleted: false
           },
           create: {
             name: itemManufacturer,
@@ -233,6 +236,7 @@ export async function update(
               row["Manufacturer Country"] === "null"
                 ? null
                 : row["Manufacturer Country"],
+                isDeleted: false
           },
         });
       } catch (error) {
@@ -301,6 +305,7 @@ export async function update(
             manufacturerId: manufacturer && manufacturer.id,
             barcode: row["Item Barcode"],
             ordinal: parseInt(row["Item Ordinal"]),
+            isDeleted: false
           },
           create: {
             id: row["Item Id"],
@@ -332,6 +337,7 @@ export async function update(
             manufacturerId: manufacturer && manufacturer.id,
             barcode: row["Item Barcode"],
             ordinal: parseInt(row["Item Ordinal"]),
+            isDeleted: false
           },
         });
       } catch (error) {
@@ -387,7 +393,7 @@ export async function update(
         id: { notIn: itemIds },
       },
       data: {
-        isArchived: true,
+        isDeleted: true
       },
     });
   } catch (error) {
@@ -396,10 +402,13 @@ export async function update(
     throw new Error(`Cleanup products error ${error}`);
   }
   try {
-    const deletedCategories = await prismadb.category.deleteMany({
+    const deletedCategories = await prismadb.category.updateMany({
       where: {
         id: { notIn: categoryIds },
       },
+      data: {
+        isDeleted: true
+      }
     });
   } catch (error) {
     notify.error(error);
@@ -407,10 +416,13 @@ export async function update(
     throw new Error(`Cleanup categories error ${error}`);
   }
   try {
-    const deletedManufacuteres = await prismadb.manufacturer.deleteMany({
+    const deletedManufacuteres = await prismadb.manufacturer.updateMany({
       where: {
         id: { notIn: manufacturerIds },
       },
+      data: {
+        isDeleted: true
+      }
     });
   } catch (error) {
     notify.error(error);
@@ -418,10 +430,13 @@ export async function update(
     throw new Error(`Cleanup manufacturers error ${error}`);
   }
   try {
-    const deletedSizes = await prismadb.size.deleteMany({
+    const deletedSizes = await prismadb.size.updateMany({
       where: {
         id: { notIn: sizeIds },
       },
+      data: {
+        isDeleted: true
+      }
     });
   } catch (error) {
     notify.error(error);

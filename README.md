@@ -2,7 +2,7 @@
 
 > A admin dashboard and CMS designed for Flex5
 
-This application is a fully functional CMS designed to integrate with [Flex Rental Solutions](https://www.flexrentalsolutions.com/flex-rental-solutions/), a cloud-based, inventory management and rental software primarily used for the live event industry. Using the Flex5 API, this application allows customers to request a quote, from your company's real-time Flex rental inventory. The application's robust api allows you to easily connect to a customer-facing rental website. (here)
+This application is a fully functional CMS designed to integrate with [Flex Rental Solutions](https://www.flexrentalsolutions.com/flex-rental-solutions/), a cloud-based, inventory management and rental software primarily used for the live event industry. Using the Flex5 API, this application allows customers to request a quote, from your company's real-time Flex rental inventory. The application's robust api allows you to easily connect to a customer-facing rental website like the one I created for [Corporate Lighting and Audio](https://rentals.corplighting.com/). 
 
 This headless CMS allows members of your company to review the inventory items you want customers to see, view customer submitted quotes, and manage promotional banners for your customer-facing rental site.
 
@@ -28,6 +28,9 @@ This headless CMS allows members of your company to review the inventory items y
 - PlanetScale
 - Cloudinary
 - Nodemailer
+- Vercel Cron Jobs
+- Zod State Management
+- React Hook Forms
 
 ## Features
 
@@ -95,3 +98,9 @@ In progress:
 ## Acknowledgements
 
 This project was created as a pitch for [Corporate Ligthing and Audio](https://www.corplighting.com/), a New Orleans based live event production company. In collabaration with the UX designer at Poola Marketing, it has since been styled to align with their brand identity. You can view their rental site [here](https://rentals.corplighting.com/).
+
+All inventory data is pulled from the Corporate Lighting Flex5 database, and any features that would affect their inventory directly has been disabled to protect their data. 
+
+The inventory data is pulled from the Flex5 API using a custom jaspersoft report to avoid hitting the API's request limit. If you would like to see the documentation for the Flex5 API you can access it [here](https://cla.flexrentalsolutions.com/f5/swagger-ui/index.html#/)
+
+The concept of this project was inspired by https://www.rentex.com/.
