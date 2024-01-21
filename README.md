@@ -32,6 +32,7 @@ This headless CMS allows members of your company to review the inventory items y
 - Zod State Management
 - React Hook Forms
 - Recharts (for the graph on the dashboard)
+  
 ![](/images/Screenshot%202024-01-20%20at%208.57.55 PM.png)
 
 ## Features
@@ -50,6 +51,7 @@ Users will be able to:
 - View graphs of most popular products and categories.
 - Track who's viewed a quote.
 - Sort, filter, and change the status of quotes from data tables
+  
 ![](/images/Datatable.gif)
 
 ### Schema
@@ -101,7 +103,7 @@ In progress:
 
 ## Acknowledgements
 
-This project was created as a pitch for [Corporate Ligthing and Audio](https://www.corplighting.com/), a New Orleans based live event production company. In collabaration with the UX designer at Poola Marketing, it has since been styled to align with their brand identity. You can view their rental site [here](https://rentals.corplighting.com/).
+This project was created as a pitch for [Corporate Lighting and Audio](https://www.corplighting.com/), a New Orleans based live event production company. In collabaration with the UX designer at Poola Marketing, it has since been styled to align with their brand identity. You can view their rental site [here](https://rentals.corplighting.com/).
 
 All inventory data is pulled from the Corporate Lighting Flex5 database, and any features that would affect their inventory directly has been disabled to protect their data. 
 
