@@ -31,6 +31,7 @@ This headless CMS allows members of your company to review the inventory items y
 - Vercel Cron Jobs
 - Zod State Management
 - React Hook Forms
+- Recharts (for the graph on the dashboard)
 
 ## Features
 
@@ -104,3 +105,5 @@ All inventory data is pulled from the Corporate Lighting Flex5 database, and any
 The inventory data is pulled from the Flex5 API using a custom jaspersoft report to avoid hitting the API's request limit. If you would like to see the documentation for the Flex5 API you can access it [here](https://cla.flexrentalsolutions.com/f5/swagger-ui/index.html#/)
 
 The concept of this project was inspired by https://www.rentex.com/.
+
+Dashboard design inspired by [Shadcn UI](https://ui.shadcn.com/examples/dashboard). 
