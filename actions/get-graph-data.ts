@@ -47,12 +47,12 @@ export const getGraphData = async () => {
         { name: "Dec", Quotes: 0, Items: 0},
     ]
 
-    // for (const month in monthlyQuotes) {
-    //     graphData[parseInt(month)].Quotes = monthlyQuotes[parseInt(month)]
-    // }
-    // for (const month in monthlyQuoteItems) {
-    //     graphData[parseInt(month)].Items = monthlyQuoteItems[parseInt(month)]
-    // }
+    for (const month in monthlyQuotes) {
+        graphData[parseInt(month)].Quotes = monthlyQuotes[parseInt(month)]
+    }
+    for (const month in monthlyQuoteItems) {
+        graphData[parseInt(month)].Items = monthlyQuoteItems[parseInt(month)]
+    }
 
 
     return graphData;

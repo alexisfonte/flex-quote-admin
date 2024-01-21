@@ -32,6 +32,7 @@ This headless CMS allows members of your company to review the inventory items y
 - Zod State Management
 - React Hook Forms
 - Recharts (for the graph on the dashboard)
+![](/images/Screenshot%202024-01-20%20at%208.57.55 PM.png)
 
 ## Features
 
@@ -48,6 +49,8 @@ Users will be able to:
 - View customer quotes and import them into Flex (disabled in demo)
 - View graphs of most popular products and categories.
 - Track who's viewed a quote.
+- Sort, filter, and change the status of quotes from data tables
+![](/images/Datatable.gif)
 
 ### Schema
 
