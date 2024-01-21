@@ -1,6 +1,6 @@
 # Flex5 Quote Admin Dashboard & CMS
 
-> A admin dashboard and CMS designed for Flex5
+> An admin dashboard and CMS designed for Flex5
 
 This application is a fully functional CMS designed to integrate with [Flex Rental Solutions](https://www.flexrentalsolutions.com/flex-rental-solutions/), a cloud-based, inventory management and rental software primarily used for the live event industry. Using the Flex5 API, this application allows customers to request a quote, from your company's real-time Flex rental inventory. The application's robust api allows you to easily connect to a customer-facing rental website like the one I created for [Corporate Lighting and Audio](https://rentals.corplighting.com/). 
 
